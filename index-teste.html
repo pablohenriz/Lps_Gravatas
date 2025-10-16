@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Carrinho Simples</title>
+<style>
+  .produto {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  #carrinho {
+    margin-top: 20px;
+    border-top: 2px solid #000;
+    padding-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<h2>Produtos</h2>
+<div class="produto" data-id="1" data-nome="Camiseta" data-preco="49.90">
+  <h3>Camiseta</h3>
+  <p>Preço: R$ 49,90</p>
+  <button class="add-carrinho">Adicionar ao carrinho</button>
+</div>
+
+<div class="produto" data-id="2" data-nome="Calça Jeans" data-preco="120.00">
+  <h3>Calça Jeans</h3>
+  <p>Preço: R$ 120,00</p>
+  <button class="add-carrinho">Adicionar ao carrinho</button>
+</div>
+
+<div class="produto" data-id="3" data-nome="Tênis" data-preco="200.00">
+  <h3>Tênis</h3>
+  <p>Preço: R$ 200,00</p>
+  <button class="add-carrinho">Adicionar ao carrinho</button>
+</div>
+
+<h2>Carrinho</h2>
+<div id="carrinho">
+  <p>Nenhum item no carrinho.</p>
+</div>
+
+<script>
+  const botoes = document.querySelectorAll('.add-carrinho');
+  const carrinho = document.getElementById('carrinho');
+  const itensCarrinho = [];
+
+  botoes.forEach(botao => {
+    botao.addEventListener('click', () => {
+      const produto = botao.parentElement;
+      const id = produto.getAttribute('data-id');
+      const nome = produto.getAttribute('data-nome');
+      const preco = produto.getAttribute('data-preco');
+
+      // Adiciona item ao array do carrinho
+      itensCarrinho.push({ id, nome, preco });
+
+      // Atualiza a visualização do carrinho
+      mostrarCarrinho();
+    });
+  });
+
+  function mostrarCarrinho() {
+    if (itensCarrinho.length === 0) {
+      carrinho.innerHTML = '<p>Nenhum item no carrinho.</p>';
+      return;
+    }
+
+    // Monta lista de itens
+    let html = '<ul>';
+    itensCarrinho.forEach(item => {
+      html += `<li>${item.nome} - R$ ${item.preco}</li>`;
+    });
+    html += '</ul>';
+
+    carrinho.innerHTML = html;
+  }
+</script>
+
+</body>
+</html>
