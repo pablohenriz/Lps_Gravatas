@@ -782,28 +782,3 @@ body.colecao {
 
 /*área de compra*/
 
-.compra {
-    background-color: #fff;
-    border: 2px solid var(--border);
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    position: fixed;
-    left: 1;
-    top: 0;
-    right: 0;
-    width: 600px;
-    height: 100%;
-    z-index: 1000;
-}
-
-.compra h1 {
-    font-size: 37px;
-}
-
-.compra h3 {
-    display: inline-block;
-    font-size: 25px;
-}
-
-.compra .h3-2 {
-    margin-left: 50%;
-}
