@@ -23,7 +23,7 @@
 }
 
 ::selection {
-    background-color: #fff;
+    background-color: #7a7a7a;
     color: #000000;
 }
 
@@ -669,18 +669,15 @@ body.colecao {
 /*Categorias lateral*/
 
 .produtos .categoria {
-    position: absolute;
-    top: 300px;
+    margin-top: 164px;
     width: 250px;
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     height: fit-content;
 }
 
 .produtos .categoria h1 {
     margin-bottom: 15px;
-    font-size: 18px;
+    font-size: 30px;
     color: #000000;
 }
 
@@ -688,6 +685,16 @@ body.colecao {
     display: block;
     margin-bottom: 8px;
     font-size: 14px;
+}
+
+.produtos .categoria input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.produtos .categoria input {
+    margin-right: 20px;
 }
 
 /*filtro lateral*/
@@ -702,15 +709,24 @@ body.colecao {
     top: 20px;
 }
 
-/*área de produtos*/
-
+/*===============área de produtos========================*/
 .produtos .container-prod {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-top: 80px;
+}
+
+.produtos .box-group {
+    display: flex;
     flex: 1;
     display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
     gap: 15px;
-    margin-top: 100px;
+    margin-top: 80px;
+    align-items: center;
 }
+
 .produtos .container-prod .box {
     background-color: #fff;
     border-radius: 8px;
@@ -719,6 +735,7 @@ body.colecao {
     text-align: center;
     transition: transform 0.2s;
     cursor: pointer;
+    border: #000000 2px solid;
 }
 
 .produtos .container-prod .box:hover {
@@ -742,13 +759,12 @@ body.colecao {
 
 .produtos .btn1 {
     background: #e2d693;
-    padding: 1rem 5rem;
     color: #000000;
     text-align: center;
     font-size: 3rem;
     max-width: 1000rem;
     cursor: pointer;
-    width: 50rem;
+    width: 100%;
     height: 5rem;
     margin: 0 auto;
     margin-top: 3rem;
@@ -771,5 +787,6 @@ body.colecao {
 }
 
 
-/*área de compra*/
+/*==================área de compra===========================*/
+
 
