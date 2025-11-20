@@ -103,12 +103,8 @@ input {
     display: inline-block;
 }
 
-.btn:hover {
-    padding: 1.5rem 6rem;
-    letter-spacing: 0.3rem;
-}
 
-/*Base com imagem e centro do site*/
+/*======Base com imagem e centro do site=================*/
 .home-container {
     background: url("./img/Design\ sem\ nome\ \(3\).png");
     background-position: center;
@@ -143,7 +139,7 @@ input {
     width: 600px;
 }
 
-/*Conteudo da segunda parte do site -Sobre */
+/*=========Conteudo da segunda parte do site -Sobre=============== */
 .Title {
     text-align: center;
     font-size: 7rem;
@@ -192,7 +188,7 @@ input {
     height: 714px;
 }
 
-/* Conteudo terceira parte do site- Produtos*/
+/*====== Conteudo terceira parte do site- Produtos===========*/
 
 .produto .container-prod {
     display: grid;
@@ -247,12 +243,8 @@ input {
     margin-bottom: 100px;
 }
 
-.produto .btn1:hover {
-    padding: 1.5rem 5.5rem 1.5rem;
-}
 
-
-/*Área de Créditos*/
+/*=====================Área de Créditos===============*/
 .creditos {
     display: flex;
     align-items: stretch;
@@ -432,7 +424,6 @@ body.login {
 
 .container-login .btn:hover {
     background: #e2ddbe;
-    letter-spacing: normal;
 }
 
 .container-login p {
