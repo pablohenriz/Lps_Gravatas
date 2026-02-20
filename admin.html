@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LPS Gravatas | Admin</title>
+  <link rel="icon" href="img/favicon-32x32.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="index.html" class="brand"><img src="img/Logo 192x192.png" alt="Logo LPS" /></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="produtos.html">Produtos</a>
+        <a href="promocoes.html">Promocoes</a>
+        <a href="admin.html" class="active">Admin</a>
+      </nav>
+      <div id="authSlot" class="auth-slot"></div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <h2 class="title"><span>Painel</span> Administrativo</h2>
+      <p class="help">Cadastrar novos produtos e acompanhar catalogo.</p>
+
+      <section class="panel" style="margin-top: 14px;">
+        <h3>Novo produto</h3>
+        <form id="adminProductForm" class="form" style="margin-top: 10px; max-width: 720px;">
+          <label for="prodName">Nome</label>
+          <input id="prodName" name="name" type="text" required />
+          <label for="prodCategory">Categoria</label>
+          <input id="prodCategory" name="category" type="text" required />
+          <label for="prodDesc">Descricao</label>
+          <textarea id="prodDesc" name="description" required></textarea>
+          <label for="prodPrice">Preco normal</label>
+          <input id="prodPrice" name="price" type="number" min="0.01" step="0.01" required />
+          <label for="prodPromo">Preco promocional (opcional)</label>
+          <input id="prodPromo" name="promoPrice" type="number" min="0.01" step="0.01" />
+          <button type="submit">Salvar produto</button>
+        </form>
+        <div id="adminStatus" class="status"></div>
+      </section>
+
+      <section class="panel" style="margin-top: 16px;">
+        <h3>Produtos cadastrados</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Preco</th>
+                <th>Promo</th>
+              </tr>
+            </thead>
+            <tbody id="productsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <section class="credits"><div class="container credits-inner"><div><h4>NAVEGACAO</h4><p><a href="index.html">Inicio</a></p></div><div><h4>ENVIO</h4><img src="img/Pix-logo 290x100px.png" alt="Pix" class="pix" /></div><div><h4>CONTATO</h4><p>+11 98475-0368</p></div><div><h4>AREA</h4><p>Somente administradores</p></div></div></section>
+  <footer class="final"><div class="container">LPS Gravatas 2026</div></footer>
+  <a class="whatsapp" target="_blank" href="https://api.whatsapp.com/send/?phone=5511983273207&text&type=phone_number&app_absent=0"><img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp--v1.png" alt="WhatsApp" /></a>
+
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

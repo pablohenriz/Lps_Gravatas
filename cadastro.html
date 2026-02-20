@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LPS Gravatas | Cadastro</title>
+  <link rel="icon" href="img/favicon-32x32.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="index.html" class="brand"><img src="img/Logo 192x192.png" alt="Logo LPS" /></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="produtos.html">Produtos</a>
+        <a href="promocoes.html">Promocoes</a>
+      </nav>
+      <div id="authSlot" class="auth-slot"></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="form-wrap panel reveal is-visible">
+      <h2 class="title"><span>Criar</span> Conta</h2>
+      <form id="registerForm" class="form">
+        <label for="name">Nome completo</label>
+        <input id="name" name="name" type="text" required />
+        <label for="regEmail">Email</label>
+        <input id="regEmail" name="email" type="email" required />
+        <label for="regPass">Senha</label>
+        <input id="regPass" name="password" type="password" required />
+        <button type="submit">Cadastrar-se</button>
+      </form>
+      <div id="registerStatus" class="status"></div>
+      <div class="actions-row"><a class="btn btn-outline" href="login.html">Ja tenho conta</a></div>
+    </section>
+  </main>
+
+  <section class="credits"><div class="container credits-inner"><div><h4>NAVEGACAO</h4><p><a href="index.html">Inicio</a></p></div><div><h4>ENVIO</h4><img src="img/Pix-logo 290x100px.png" alt="Pix" class="pix" /></div><div><h4>CONTATO</h4><p>lps_gravatas.com</p></div><div><h4>LOGIN</h4><p><a href="login.html">Entrar</a></p></div></div></section>
+  <footer class="final"><div class="container">LPS Gravatas 2026</div></footer>
+  <a class="whatsapp" target="_blank" href="https://api.whatsapp.com/send/?phone=5511983273207&text&type=phone_number&app_absent=0"><img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp--v1.png" alt="WhatsApp" /></a>
+
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/forms.js"></script>
+</body>
+</html>
