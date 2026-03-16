@@ -1,244 +1,302 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="img/favicon-32x32.png" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap"
-        rel="stylesheet">
-    <title>Lps Gravatas</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LPS Gravatas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
-    <header class="header">
-        <section>
-            <a href="#home" class="Logo">
-                <img src="./img/Logo 192x192.png" alt="Logo_Lps">
-            </a>
-            
-            <nav class="navbar">
-                <a href="#home">Home</a>
-                <a href="/index-produtos.html">Produtos</a>
-                <a href="#address">Endereços</a>
-                <a href="/index-sobre.html">Sobre</a>
-            </nav>
-
-            <div class="icons">
-                <img width="30" height="30" src="https://img.icons8.com/ios-filled/48/ffffff/search--v1.png"
-                    alt="search--v1" />
-
-                <img width="32" height="30" src="https://img.icons8.com/forma-bold-filled/48/ffffff/shopping-cart.png"
-                    alt="shopping-cart" />
-
-
-                <a href="index-login.html"><img width="35" height="38"
-                        src="https://img.icons8.com/pastel-glyph/48/ffffff/person-male--v3.png"
-                        alt="person-male--v3" /></a>
-            </div>
-        </section>
-    </header>
-
-    <div class="home-container">
-        <section id="home">
-            <div class="conteudo">
-                <h3>Elegância em cada Nó!</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit tenetur ad voluptate tempore quidem
-                    totam vitae, laborum ipsa assumenda, libero maxime eos dolorum optio incidunt. Illum, saepe! Qui,
-                    commodi laboriosam.</p>
-                <a href="#produtos" class="btn">Garanta o seu!</a>
-            </div>
-        </section>
+ 
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo" onclick="showView('home')">
+      <span class="logo-text">LPS</span>
     </div>
-
-    <section class="produto" id="produto">
-        <h2 class="Title"><span>Nosso</span> Menu</h2>
-        <div class="container-prod">
-            <div class="box">
-                <img src="./img/Azul com rosas.png" alt="item-1">
-                <h3>Gravata Azul Florida</h3>
-                <div class="preco">R$ 49,99</div>
-                <a href="#" class="btn">Adicione ao Carrinho</a>
-            </div>
-            <div class="box">
-                <img src="./img/gravata-rosa.png" alt="item-2">
-                <h3>Gravata Preta e Rosa</h3>
-                <div class="preco">R$ 49,99</div>
-                <a href="#" class="btn">Adicione ao Carrinho</a>
-            </div>
-            <div class="box">
-                <img src="./img/gravata-roxa.png" alt="item-3">
-                <h3>Gravata Roxa</h3>
-                <div class="preco">R$ 49,99</div>
-                <a href="#" class="btn">Adicione ao Carrinho</a>
-            </div>
-            <div class="box">
-                <img src="./img/gravata-preta-origim.png" alt="item-4">
-                <h3>Gravata Preta com Flores</h3>
-                <div class="preco">R$49,99 <span><s>59,99</s></span></div>
-                <a href="#" class="btn">Adicione ao Carrinho</a>
-            </div>
-            <div class="box">
-                <img src="./img/Azul com bolinhas.png" alt="item-5">
-                <h3>Gravata Azul com Bolinhas</h3>
-                <div class="preco">R$ 49,99</div>
-                <a href="#" class="btn">Adicione ao Carrinho</a>
-            </div>
-            <div class="box">
-                <img src="./img/gravata-verde-potilhada.png" alt="item-6">
-                <h3>Gravata verde pontilhada</h3>
-                <div class="preco">R$ 49,99</div>
-                <a href="#" class="btn">Adicione ao Carrinho</a>
-            </div>
+    <nav class="nav">
+      <span class="nav-link active" data-view="home" onclick="showView('home')">Home</span>
+      <span class="nav-link" data-view="produtos" onclick="showView('produtos')">Produtos</span>
+      <span class="nav-link" onclick="scrollToSection('footer')">Endereços</span>
+      <span class="nav-link" data-view="sobre" onclick="showView('sobre')">Sobre</span>
+    </nav>
+    <div class="header-icons">
+      <div class="icon-btn"><i class="fa-solid fa-magnifying-glass"></i></div>
+      <div class="icon-btn" onclick="showView('carrinho')" id="cart-icon-btn">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="cart-badge" id="cart-badge" style="display:none">0</span>
+      </div>
+      <div class="icon-btn" onclick="showView('login')"><i class="fa-regular fa-user"></i></div>
+    </div>
+  </div>
+</header>
+ 
+<!-- ===================== VIEW: HOME ===================== -->
+<div class="view active" id="view-home">
+  <div class="hero">
+    <div class="hero-bg-text">NÓS</div>
+    <div class="hero-content">
+      <span class="hero-tag">Nova Coleção 2025</span>
+      <h1>Elegância em<br><em>cada Nó</em></h1>
+      <p>Gravatas de alta qualidade para homens que valorizam estilo, sofisticação e presença em cada detalhe.</p>
+      <span class="btn-gold" onclick="showView('produtos')">Garanta o seu</span>
+    </div>
+  </div>
+ 
+  <section class="home-produtos">
+    <div class="section-title">
+      <h2>Nosso <span>Menu</span></h2>
+      <p>Peças selecionadas para cada ocasião</p>
+    </div>
+    <div class="produtos-grid" id="grid-home"></div>
+    <div style="text-align:center; margin-top:5rem;">
+      <span class="btn-gold" onclick="showView('produtos')">Ver Toda Coleção</span>
+    </div>
+  </section>
+ 
+  <section class="home-sobre">
+    <div class="home-sobre-inner">
+      <div class="home-sobre-img">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80" alt="Sobre LPS">
+      </div>
+      <div class="home-sobre-texto">
+        <h2>O Que Faz Cada<br><span>Nó Especial</span></h2>
+        <p>Na LPS Gravatas, cada peça é escolhida com rigor e paixão. Acreditamos que uma boa gravata transforma não apenas o look, mas a confiança de quem a usa. Desde 2020, vestimos momentos especiais com elegância e qualidade.</p>
+        <span class="btn-gold" onclick="showView('sobre')">Saiba Mais</span>
+      </div>
+    </div>
+  </section>
+ 
+  <div id="footer-anchor"></div>
+</div>
+ 
+<!-- ===================== VIEW: PRODUTOS ===================== -->
+<div class="view" id="view-produtos">
+  <div class="produtos-page">
+    <div class="produtos-page-header">
+      <h1>Nossa <span>Coleção</span></h1>
+      <p>Encontre a gravata perfeita para cada ocasião</p>
+    </div>
+    <div class="produtos-layout">
+      <aside class="sidebar">
+        <div class="sidebar-section">
+          <h3>Categoria</h3>
+          <label class="filter-label"><input type="checkbox" value="floral"> Floral</label>
+          <label class="filter-label"><input type="checkbox" value="liso"> Liso</label>
+          <label class="filter-label"><input type="checkbox" value="estampado"> Estampado</label>
+          <label class="filter-label"><input type="checkbox" value="pontilhado"> Pontilhado</label>
         </div>
-
-        <div class="btn1"><a href="index-produtos.html" class="btn1">Ver Mais</a></div>
-    </section>
-
-    <section class="sobre" id="sobre">
-        <h2 class="Title"><span>SOBRE</span> NÓS</h2>
-        <div class="conteudo2">
-            <div class="container-img">
-                <img src="./img/pedrão 2.png" alt="sobre-nos">
-            </div>
-            <div class="conteudo-sobre-nos" id="about">
-                <h3>O Que Faz Cada Nó Especial</h3>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est aliquam, repellat doloremque obcaecati
-                    delectus minima, molestiae error consequatur id praesentium optio non voluptate minus reprehenderit.
-                    Cumque laudantium eius eligendi. Est.</p>
-                <a href="index-sobre.html" class="btn">Saiba Mais</a>
-            </div>
+        <div class="sidebar-section">
+          <h3>Preço</h3>
+          <div class="price-inputs">
+            <input type="number" class="price-input" placeholder="R$" id="preco-min">
+            <span class="price-sep">—</span>
+            <input type="number" class="price-input" placeholder="R$" id="preco-max">
+          </div>
+          <button class="btn-filtrar" onclick="filtrarProdutos()">Filtrar</button>
         </div>
-    </section>
-
-    <section class="creditos">
-        <div class="cont">
-            <div class="navegaçao">
-                <h1>NAVEGAÇÃO</h1>
-                <a href="#home">Início</a>
-                <br>
-                <a href="#produtos">Produtos</a>
-                <br>
-                <a href="#">Contato</a>
-            </div>
+      </aside>
+      <div class="produtos-main">
+        <p class="produtos-count" id="produtos-count"></p>
+        <div class="produtos-grid" id="grid-produtos"></div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<!-- ===================== VIEW: CARRINHO ===================== -->
+<div class="view" id="view-carrinho">
+  <div class="carrinho-page">
+    <h1>Carrinho de <span>Compras</span></h1>
+    <div id="carrinho-empty" class="carrinho-empty" style="display:none">
+      <i class="fa-solid fa-bag-shopping"></i>
+      <p>Seu carrinho está vazio.</p>
+      <span class="btn-gold" onclick="showView('produtos')">Explorar Produtos</span>
+    </div>
+    <div id="carrinho-content" class="carrinho-layout">
+      <div>
+        <div class="carrinho-itens-header">
+          <span>Produto</span>
+          <span>Quantidade</span>
+          <span>Subtotal</span>
+          <span></span>
         </div>
-
-        <div class="cont">
-            <div class="Formas-de-envio">
-                <h1>FORMAS DE ENVIO</h1>
-                <img src="./img/Pix-logo 290x100px.png" alt="logo-pix">
-            </div>
+        <div id="carrinho-lista"></div>
+      </div>
+      <div class="carrinho-resumo">
+        <div class="resumo-title">Resumo do Pedido</div>
+        <div class="resumo-linha">
+          <span>Subtotal</span>
+          <span class="val-gold" id="res-subtotal">R$ 0,00</span>
         </div>
-
-        <div class="contato">
-            <h1>CONTATO</h1>
-
-            <div class="conteudo3"><img width="28" height="28" src="https://img.icons8.com/windows/28/ffffff/phone.png"
-                    alt="phone" />
-                <a href="https://l.instagram.com/?u=https%3A%2F%2Fwa.me%2F5511983273207%3Ffbclid%3DPAZXh0bgNhZW0CMTEAAacKzvU19cSkESr2-xrqKS7M54zYAmSqzZSI8x__tTg6YnmW4xZb_xURQaT-Hw_aem_Dg9Yx8DpNYbrdZw0UNHOMQ&e=AT2XDO8O3jDOlteCFxf2c0pC3tmYkcgZiXbZo-sxePiSSIH-bi1IZ6xOGPBNU6jxnZHN9UOuoF8b7NrLTAkQXpiQqWfenylpqk9IqaMsy7XcGts_5suRU04"
-                    target="_blank">
-                    <p>+11 98475-0368</p>
-                </a>
-            </div>
-
-            <div class="conteudo3"><img width="28" height="28" src="https://img.icons8.com/windows/28/ffffff/email.png"
-                    alt="email" />
-                <p>lps_gravatas.com</p>
-            </div>
-
-            <div class="conteudo3"><img width="28" height="28" src="https://img.icons8.com/windows/28/ffffff/marker.png"
-                    alt="marker" />
-                <p>Rua das Acácias N43</p>
-            </div>
+        <div class="resumo-linha">
+          <span>Frete</span>
+          <span id="res-frete">—</span>
         </div>
+        <div class="resumo-linha total">
+          <span>Total</span>
+          <span class="val-gold" id="res-total">R$ 0,00</span>
         </div>
-
-
-        <div class="cont">
-            <h1>REDES SOCIAIS</h1>
-
-            <div class="redes-sociais">
-                <div class="icon-rede"><a href="https://www.instagram.com/lps_gravatas/" target="_blank"><img width="32"
-                            height="32"
-                            src="https://img.icons8.com/external-tal-revivo-bold-tal-revivo/32/ffffff/external-instagram-a-popular-social-networking-service-with-magic-filters-logo-bold-tal-revivo.png"
-                            alt="external-instagram-a-popular-social-networking-service-with-magic-filters-logo-bold-tal-revivo" /></a>
-                </div>
-
-                <div class="icon-rede"><a href="#a"><img width="32" height="32"
-                            src="https://img.icons8.com/external-tal-revivo-bold-tal-revivo/32/ffffff/external-facebook-an-online-social-media-and-social-networking-service-logo-bold-tal-revivo.png"
-                            alt="external-facebook-an-online-social-media-and-social-networking-service-logo-bold-tal-revivo" /></a>
-                </div>
-            </div>
+        <div class="cep-group">
+          <div class="cep-label">Calcular Frete</div>
+          <div class="cep-input-row">
+            <input type="text" class="cep-input" id="cep-input" placeholder="00000-000" maxlength="9">
+            <button class="btn-cep" onclick="calcularFrete()">OK</button>
+          </div>
+          <a href="#" style="font-size:1.2rem; color:var(--gray2); display:block; margin-top:1rem;" onclick="return false">Não sei meu CEP</a>
         </div>
-    </section>
-
-    <section class="final">
-        <div class="feito-por">
-            <p>Feito por:</p><a href="https://www.instagram.com/1henry.x/" target="_blank"> Henry</a>
+        <button class="btn-finalizar" onclick="finalizarCompra()">Finalizar Compra</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<!-- ===================== VIEW: LOGIN ===================== -->
+<div class="view" id="view-login">
+  <div class="auth-page" id="auth-container">
+    <!-- Login form injetado por JS -->
+  </div>
+</div>
+ 
+<!-- ===================== VIEW: SOBRE ===================== -->
+<div class="view" id="view-sobre">
+  <section class="sobre-hero-section">
+    <div class="sobre-hero-txt">
+      <span class="sobre-tag">Nossa História</span>
+      <h1>Elegância em<br><em>cada Nó</em></h1>
+      <p>Desde o início, a LPS Gravatas nasceu com uma missão simples: oferecer gravatas de alta qualidade que transformam qualquer look em uma declaração de estilo e personalidade.</p>
+    </div>
+    <div class="sobre-hero-img">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=460&q=80" alt="Fundador">
+      <div class="sobre-badge">
+        <span class="sobre-badge-num">+500</span>
+        <span class="sobre-badge-lbl">Clientes Felizes</span>
+      </div>
+    </div>
+  </section>
+ 
+  <section class="valores-section">
+    <div class="valores-inner">
+      <div class="section-title">
+        <h2>Nossos <span>Valores</span></h2>
+      </div>
+      <div class="valores-grid">
+        <div class="valor-card"><div class="valor-icon">✦</div><h3>Qualidade</h3><p>Cada gravata é selecionada com rigor para garantir acabamento impecável e durabilidade.</p></div>
+        <div class="valor-card"><div class="valor-icon">◈</div><h3>Estilo</h3><p>Designs exclusivos que acompanham as tendências da moda masculina, do clássico ao contemporâneo.</p></div>
+        <div class="valor-card"><div class="valor-icon">❋</div><h3>Atendimento</h3><p>Sua satisfação é nossa prioridade. Estamos sempre disponíveis para ajudar você a encontrar o look perfeito.</p></div>
+        <div class="valor-card"><div class="valor-icon">◉</div><h3>Confiança</h3><p>Transparência e comprometimento em cada venda, do pedido até a entrega na sua porta.</p></div>
+      </div>
+    </div>
+  </section>
+ 
+  <section class="historia-section">
+    <div class="historia-layout">
+      <div class="historia-txt">
+        <div class="section-title" style="text-align:left; margin-bottom:3rem;">
+          <h2>Nossa <span>História</span></h2>
         </div>
-        <div class="Direitos">
-            <p>Copyright LPS GRAVATAS - 12.345.678/0001-90 - 2025. Todos os direitos reservados.</p>
-        </div>
-    </section>
-
-    <section class="whatss-logo">
-        <a href="https://api.whatsapp.com/send/?phone=5511983273207&text&type=phone_number&app_absent=0"
-            target="_blank"><img width="64" height="64" src="https://img.icons8.com/cotton/64/whatsapp--v4.png"
-                alt="whatsapp--v4" /></a>
-    </section>
-
-    <section class="compra">
-        <h1>CARRINHO DE COMPRAS</h1>
-        <h3>PRODUTOS</h3>
-        <h3 class="h3-2">subtotal</h3>
-        
-        <div class="produto">
-            <img src="/img/Azul com rosas.png alt=" alt="produto-img">
-
-            
-        </div>
-
-        <br>
-        <br>
-        <br>
-
-        <h2>Subtotal(Sem Frete):</h2>
-        <div class="valor">
-
-        </div>
-        <div class="cep">
-            <img width="48" height="48" src="https://img.icons8.com/pulsar-line/48/ffffff/truck.png" alt="truck"/>
-            <p>Meios de Envio</p>
-            <input type="number" placeholder="Seu CEP">
-            <button class="cacl">Calcular</button>
-            <a href="#">Não sei meu CEP</a>
-        </div>
-
-        <div class="lojas">
-            <img width="48" height="48" src="https://img.icons8.com/pulsar-line/48/ffffff/shop.png" alt="shop"/>
-            <p>Nossas lojas</p>
-            <a href="">VER OPÇÕES</a>
-            <img width="15" height="10" src="https://img.icons8.com/ios-glyphs/10/ffffff/sort-down.png" alt="sort-down"/>
-        </div>
-        <div class="mais-lojas">
-            <input type="checkbox" id="selection1">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum modi amet, esse blanditiis repellat voluptates cupiditate optio aspernatur voluptatibus neque porro cum quam inventore libero nihil quis unde asperiores voluptate.</p>
-            <h2>Grátis</h2>
-            <input type="checkbox" id="selection2">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, eum libero incidunt corporis totam earum consequatur, assumenda, numquam saepe rerum aliquid quaerat corrupti nam deserunt vero reiciendis a quo? Consequuntur?</p>
-            <h2>Grátis</h2>
-        </div>
-        <div class="total">
-            <h1>Total</h1>
-            <h1>R$00,00</h1>
-        </div>
-        <a href="#">Ver mais</a>
-    </section>
-
-    <script src="script.js"></script>
+        <p>A LPS Gravatas surgiu da paixão pelo estilo masculino e pela vontade de democratizar o acesso a gravatas de alta qualidade no Brasil. O que começou como um projeto pequeno rapidamente cresceu graças à confiança dos nossos clientes.</p>
+        <p>Hoje contamos com uma coleção variada que vai do clássico ao floral, do sóbrio ao vibrante, para que você encontre o nó certo para cada ocasião.</p>
+        <p>Cada peça é cuidadosamente escolhida para unir estética, conforto e durabilidade — porque uma boa gravata não é apenas um acessório, é uma extensão da sua personalidade.</p>
+        <span class="btn-gold" onclick="showView('produtos')" style="margin-top:2rem; display:inline-block;">Ver Coleção</span>
+      </div>
+      <div class="historia-nums">
+        <div class="num-card"><span class="num">2020</span><span class="num-lbl">Fundação</span></div>
+        <div class="num-card"><span class="num">+50</span><span class="num-lbl">Modelos</span></div>
+        <div class="num-card"><span class="num">+500</span><span class="num-lbl">Clientes</span></div>
+        <div class="num-card"><span class="num">5★</span><span class="num-lbl">Avaliação</span></div>
+      </div>
+    </div>
+  </section>
+ 
+  <section class="depoimentos-section">
+    <div class="depoimentos-inner">
+      <div class="section-title">
+        <h2>O que <span>dizem</span> sobre nós</h2>
+      </div>
+      <div class="depo-grid">
+        <div class="depo-card"><div class="depo-stars">★★★★★</div><p>"Comprei para o meu casamento e ficou perfeita! Qualidade incrível e entrega rápida. Recomendo demais!"</p><div class="depo-author"><div class="depo-avatar">MR</div><div><strong>Marcos R.</strong><span>São Paulo, SP</span></div></div></div>
+        <div class="depo-card"><div class="depo-stars">★★★★★</div><p>"Sempre compro minhas gravatas aqui. A variedade é ótima e o preço é justo para a qualidade entregue."</p><div class="depo-author"><div class="depo-avatar">JP</div><div><strong>João P.</strong><span>Rio de Janeiro, RJ</span></div></div></div>
+        <div class="depo-card"><div class="depo-stars">★★★★★</div><p>"Atendimento nota 10! Tirei dúvidas pelo WhatsApp e fui atendido rapidamente. Produto incrível."</p><div class="depo-author"><div class="depo-avatar">CS</div><div><strong>Carlos S.</strong><span>Belo Horizonte, MG</span></div></div></div>
+      </div>
+    </div>
+  </section>
+ 
+  <section class="cta-section">
+    <h2>Pronto para encontrar sua gravata perfeita?</h2>
+    <p>Explore a coleção e encontre o estilo que combina com você.</p>
+    <div class="cta-btns">
+      <span class="btn-dark" onclick="showView('produtos')">Ver Produtos</span>
+      <a class="btn-outline-gold" style="border-color:#000; color:#000;" href="https://wa.me/5511983273207" target="_blank">WhatsApp</a>
+    </div>
+  </section>
+</div>
+ 
+<!-- FOOTER (aparece em todas as views via JS) -->
+<footer class="footer" id="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <a onclick="showView('home')">Início</a>
+      <a onclick="showView('produtos')">Produtos</a>
+      <a onclick="showView('sobre')">Sobre</a>
+      <a onclick="showView('carrinho')">Carrinho</a>
+    </div>
+    <div class="footer-col">
+      <h4>Formas de Pagamento</h4>
+      <p>PIX</p>
+      <p>Cartão de Crédito</p>
+      <p>Cartão de Débito</p>
+      <p>Boleto Bancário</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <p><i class="fa-solid fa-phone" style="margin-right:.8rem; color:var(--gold)"></i> +11 98475-0368</p>
+      <p><i class="fa-solid fa-envelope" style="margin-right:.8rem; color:var(--gold)"></i> lps_gravatas.com</p>
+      <p><i class="fa-solid fa-location-dot" style="margin-right:.8rem; color:var(--gold)"></i> Rua das Acácias, N43</p>
+    </div>
+    <div class="footer-col">
+      <h4>Redes Sociais</h4>
+      <div class="footer-social">
+        <a class="social-icon" href="https://www.instagram.com/lps_gravatas/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a class="social-icon" href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a class="social-icon" href="https://wa.me/5511983273207" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Copyright LPS GRAVATAS — 12.345.678/0001-90 — 2025. Todos os direitos reservados.</p>
+    <p>Feito por <a href="https://www.instagram.com/1henry.x/" target="_blank">Henry</a></p>
+  </div>
+</footer>
+ 
+<!-- WhatsApp flutuante -->
+<div class="whats-float">
+  <a href="https://wa.me/5511983273207" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+</div>
+ 
+<!-- Toast -->
+<div id="toast"></div>
+ 
+<!-- Modal produto -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-box" id="modal-box">
+    <div class="modal-img"><img id="modal-img" src="" alt=""></div>
+    <div class="modal-info" style="position:relative">
+      <span class="modal-close" onclick="closeModalBtn()"><i class="fa-solid fa-xmark"></i></span>
+      <h2 id="modal-nome"></h2>
+      <div class="modal-preco" id="modal-preco"></div>
+      <p id="modal-desc"></p>
+      <button class="btn-gold" style="width:100%" onclick="adicionarModalAoCarrinho()">Adicionar ao Carrinho</button>
+    </div>
+  </div>
+</div>
+ 
+<script src="/script.js"></script>
 </body>
 </html>
+ 
