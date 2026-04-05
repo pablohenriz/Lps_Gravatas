@@ -1,12 +1,28 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using DotNetEnv; // 1. IMPORTAR O DOTNETENV
+using BCrypt.Net; // 2. IMPORTAR O BCRYPT
+
+// 3. CARREGAR O ARQUIVO .ENV (Isso deve vir antes do builder)
+DotNetEnv.Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin() // Em produção, especifique a URL exata
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+
 // --- CONFIGURAÇÃO DO MYSQL ---
-// Substitua os dados abaixo pelos do seu banco (geralmente local)
-var connectionString = "server=localhost;database=LPS_Gravataria;user=pablo;password=3544";
-var serverVersion = new MySqlServerVersion(new Version(8, 0, 31)); // Verifique sua versão do MySQL
+// 4. PEGAR A STRING REAL DA VARIÁVEL DE AMBIENTE
+var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION")?.Trim();
+var serverVersion = new MySqlServerVersion(new Version(8, 4, 8));
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, serverVersion));
@@ -34,33 +50,52 @@ app.UseHttpsRedirection();
 // ROTA DE CADASTRO
 app.MapPost("/api/cadastrar", async ([FromBody] Usuario novoUsuario, AppDbContext context) =>
 {
-    try 
+    try
     {
-        context.Usuarios.Add(novoUsuario);
+        // 5. CRIPTOGRAFAR A SENHA ANTES DE SALVAR
+        string senhaComHash = BCrypt.Net.BCrypt.HashPassword(novoUsuario.Senha);
+
+        // Criamos uma cópia do usuário com a nova senha segura
+        var usuarioSeguro = novoUsuario with { Senha = senhaComHash };
+
+        context.Usuarios.Add(usuarioSeguro);
         await context.SaveChangesAsync();
-        return Results.Ok(new { mensagem = "Usuário salvo no MySQL!" });
+
+        return Results.Ok(new { mensagem = "Usuário salvo com segurança no MySQL!" });
     }
-    catch (Exception ex)
+    catch (Exception)
     {
-        return Results.BadRequest(new { erro = ex.Message });
+        // 6. DICA: Em produção, evite retornar ex.Message diretamente
+        return Results.BadRequest(new { erro = "Não foi possível realizar o cadastro." });
     }
 });
 
 app.Run();
 
 // MODELOS
-public record Usuario(string Nome, string Email, string Senha, string? Telefone);
+public record Usuario(
+    string Nome,
+    string Email,
+    string Senha,
+    string? Telefone
+);
 
 public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+    // O nome aqui deve ser igual ao da tabela no MySQL
     public DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Usuario>().ToTable("Users");
+
+        // Indica que o IdUser existe no banco e é gerado automaticamente
+        modelBuilder.Entity<Usuario>()
+            .Property<int>("IdUser")
+            .ValueGeneratedOnAdd();
+
         modelBuilder.Entity<Usuario>().HasKey(u => u.Email);
-        
-        // Dica: No MySQL, é bom definir o tamanho máximo de strings que são chaves
-        modelBuilder.Entity<Usuario>().Property(u => u.Email).HasMaxLength(150);
     }
 }

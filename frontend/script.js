@@ -337,24 +337,27 @@ function doLogin() {
 }
 
 async function doCadastro() {
+  // Captura os valores ATUAIS dos inputs no momento do clique
   const nome = document.getElementById("cad-nome").value.trim();
   const email = document.getElementById("cad-email").value.trim();
   const senha = document.getElementById("cad-senha").value;
+  const confirma = document.getElementById("cad-confirma").value;
 
-  // 2. Validação básica antes de enviar
+  // Validação manual extra antes do fetch
   if (!nome || !emailRgx.test(email) || !senhaRgx.test(senha)) {
-    toast("Preencha todos os campos corretamente!");
+    toast("Por favor, preencha todos os campos corretamente.");
     return;
   }
 
-  const dados = { 
-    nome: nome, 
-    email: email, 
-    senha: senha };
+  if (senha !== confirma) {
+    toast("As senhas não coincidem.");
+    return;
+  }
+
+  const dados = { nome, email, senha };
 
   try {
-    // 3. Envia para o seu backend C#
-    const resposta = await fetch("https://localhost:3000/api/cadastrar", {
+    const resposta = await fetch("http://localhost:5233/api/cadastrar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(dados)
@@ -364,11 +367,12 @@ async function doCadastro() {
       toast("Cadastro realizado com sucesso! 🎉");
       setTimeout(() => renderLogin(), 1500);
     } else {
-      toast("Erro ao cadastrar. Verifique os dados.");
+      const erroTexto = await resposta.text();
+      toast("Erro do servidor: " + erroTexto);
     }    
   } catch (error) {
     console.error("Erro na requisição:", error);
-    toast("Erro de conexão com o servidor.");
+    toast("Não foi possível conectar ao servidor. O seu Backend está rodando?");
   }
 }
 
