@@ -322,9 +322,11 @@ function togglePwd(id, icon) {
   icon.classList.toggle("fa-eye-slash");
 }
 
-function doLogin() {
+async function doLogin() {
+  const nome = document.getElementById("login-nome").value.trim();
   const email = document.getElementById("login-email").value;
   const senha = document.getElementById("login-senha").value;
+  
   if (!emailRgx.test(email) || !senhaRgx.test(senha)) {
     toast("Preencha os campos corretamente!");
     document.querySelectorAll("#auth-container .field-input").forEach(i => {
@@ -332,8 +334,27 @@ function doLogin() {
     });
     return;
   }
-  toast("Login realizado com sucesso! 🎉");
-  setTimeout(() => showView("home"), 1500);
+
+  const dados = { nome, email, senha };
+
+  try {
+    const resposta = await fetch("http://localhost:5233/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dados)
+    });
+    
+    if (resposta.ok) {
+      toast("Login realizado com sucesso! 🎉");
+      setTimeout(() => showView("home"), 1500);
+    } else {
+      const erroTexto = await resposta.text();
+      toast("Erro do servidor: " + erroTexto);
+    } 
+  } catch (error) {
+    console.error("Erro na requisição:", error);
+    toast("Não foi possível conectar ao servidor. O seu Backend está rodando?");
+  }
 }
 
 async function doCadastro() {

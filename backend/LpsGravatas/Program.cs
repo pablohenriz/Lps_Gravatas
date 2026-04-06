@@ -30,7 +30,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+    options.AddDefaultPolicy(policy => 
+    policy.AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
 });
 
 builder.Services.AddEndpointsApiExplorer();
@@ -67,6 +70,24 @@ app.MapPost("/api/cadastrar", async ([FromBody] Usuario novoUsuario, AppDbContex
     {
         // 6. DICA: Em produção, evite retornar ex.Message diretamente
         return Results.BadRequest(new { erro = "Não foi possível realizar o cadastro." });
+    }
+});
+
+app.MapPost("/api/login", async ([FromBody] Usuario loginUsuario, AppDbContext context) =>
+{
+    try
+    {
+        var usuarioNoBanco = await context.Usuarios.FirstOrDefaultAsync(u => u.Email == loginUsuario.Email);
+        if (usuarioNoBanco == null || !BCrypt.Net.BCrypt.Verify(loginUsuario.Senha, usuarioNoBanco.Senha))
+        {
+            return Results.Unauthorized();
+        }
+
+        return Results.Ok(new { mensagem = "Login bem-sucedido!" });
+    }
+    catch (Exception)
+    {
+        return Results.BadRequest(new { erro = "Não foi possível realizar o login." });
     }
 });
 
