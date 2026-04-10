@@ -325,12 +325,47 @@ function doLogin() {
   setTimeout(() => showView("home"), 1500);
 }
  
-function doCadastro() {
+async function doCadastro() {
   const nome = document.getElementById("cad-nome").value.trim();
   const email = document.getElementById("cad-email").value;
-  if (!nome || !emailRgx.test(email)) { toast("Preencha todos os campos!"); return; }
-  toast("Conta criada com sucesso! 🎉");
-  setTimeout(() => renderLogin(), 1500);
+  const senha = document.getElementById("cad-senha").value;
+  const telefone = document.getElementById("cad-tel").value.trim();
+  
+  if (!nome || !emailRgx.test(email) || !senhaRgx.test(senha)) { 
+      toast("Preencha todos os campos corretamente!"); 
+      return; 
+  }
+
+  try {
+    // 1. Mudamos para a URL completa do seu backend .NET
+    const response = await fetch("http://localhost:5081/cadastrar", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ 
+        nome, 
+        email, 
+        senha,
+        telefone
+      })
+    });
+
+    // 2. Padronizamos o nome da variável para 'response'
+    if (response.ok) {
+        const resultado = await response.json();
+        console.log("Sucesso no banco:", resultado);
+        
+        // 3. O sucesso e redirecionamento só acontecem se o servidor der OK!
+        toast("Conta criada com sucesso! 🎉");
+        setTimeout(() => renderLogin(), 1500);
+    } else {
+        console.error("Erro no servidor:", response.status);
+        toast("Erro ao criar conta. Tente novamente.");
+    }
+  } catch (erro) {
+    // 4. Adicionamos o catch para capturar erros de rede (API offline, por exemplo)
+    console.error("Erro de conexão:", erro);
+    toast("Erro de conexão com o servidor.");
+  }
 }
  
 function doEsqueci() {
