@@ -2,45 +2,45 @@
 // DADOS — Produtos
 // =====================================================
 const PRODUTOS = [
-  { id:1, nome:"Gravata Azul Florida",      preco:49.99, img:"./img/Azul com rosas.png",          categoria:"floral",     desc:"Gravata de tecido premium com estampa floral azul vibrante. Perfeita para casamentos e eventos formais." },
-  { id:2, nome:"Gravata Preta e Rosa",       preco:49.99, img:"./img/gravata-rosa.png",            categoria:"floral",     desc:"Combinação sofisticada de preto e rosa. Ideal para quem quer se destacar com elegância." },
-  { id:3, nome:"Gravata Roxa",               preco:49.99, img:"./img/gravata-roxa.png",            categoria:"liso",       desc:"Clássica gravata roxa com acabamento impecável. Versátil para diferentes tipos de terno." },
-  { id:4, nome:"Gravata Preta com Flores",   preco:49.99, precoAntes:59.99, img:"./img/gravata-preta-origim.png", categoria:"floral", desc:"Exclusiva gravata preta com estampa floral discreta. Elegância e personalidade em um só produto." },
-  { id:5, nome:"Gravata Azul com Bolinhas",  preco:49.99, img:"./img/Azul com bolinhas.png",       categoria:"pontilhado", desc:"Design clássico de bolinhas azuis. Um must-have para o guarda-roupa masculino." },
-  { id:6, nome:"Gravata Verde Pontilhada",   preco:49.99, img:"./img/gravata-verde-potilhada.png", categoria:"pontilhado", desc:"Verde pontilhado para homens que não têm medo de cor. Moderna e marcante." },
-  { id:7, nome:"Gravata Bordô Lisa",         preco:49.99, img:"./img/gravata-roxa.png",            categoria:"liso",       desc:"Cor bordô intensa em tecido liso de alta qualidade. Sofisticação pura." },
-  { id:8, nome:"Gravata Listrada Azul",      preco:54.99, img:"./img/Azul com bolinhas.png",       categoria:"estampado",  desc:"Listras clássicas em tons de azul. O equilíbrio perfeito entre tradição e modernidade." },
+  { id: 1, nome: "Gravata Azul Florida", preco: 49.99, img: "./img/Azul com rosas.png", categoria: "floral", desc: "Gravata de tecido premium com estampa floral azul vibrante. Perfeita para casamentos e eventos formais." },
+  { id: 2, nome: "Gravata Preta e Rosa", preco: 49.99, img: "./img/gravata-rosa.png", categoria: "floral", desc: "Combinação sofisticada de preto e rosa. Ideal para quem quer se destacar com elegância." },
+  { id: 3, nome: "Gravata Roxa", preco: 49.99, img: "./img/gravata-roxa.png", categoria: "liso", desc: "Clássica gravata roxa com acabamento impecável. Versátil para diferentes tipos de terno." },
+  { id: 4, nome: "Gravata Preta com Flores", preco: 49.99, precoAntes: 59.99, img: "./img/gravata-preta-origim.png", categoria: "floral", desc: "Exclusiva gravata preta com estampa floral discreta. Elegância e personalidade em um só produto." },
+  { id: 5, nome: "Gravata Azul com Bolinhas", preco: 49.99, img: "./img/Azul com bolinhas.png", categoria: "pontilhado", desc: "Design clássico de bolinhas azuis. Um must-have para o guarda-roupa masculino." },
+  { id: 6, nome: "Gravata Verde Pontilhada", preco: 49.99, img: "./img/gravata-verde-potilhada.png", categoria: "pontilhado", desc: "Verde pontilhado para homens que não têm medo de cor. Moderna e marcante." },
+  { id: 7, nome: "Gravata Bordô Lisa", preco: 49.99, img: "./img/gravata-roxa.png", categoria: "liso", desc: "Cor bordô intensa em tecido liso de alta qualidade. Sofisticação pura." },
+  { id: 8, nome: "Gravata Listrada Azul", preco: 54.99, img: "./img/Azul com bolinhas.png", categoria: "estampado", desc: "Listras clássicas em tons de azul. O equilíbrio perfeito entre tradição e modernidade." },
 ];
- 
+
 // =====================================================
 // CARRINHO
 // =====================================================
 const CART_KEY = "lps_cart";
- 
+
 function getCart() {
   try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
   catch { return []; }
 }
 function saveCart(c) { localStorage.setItem(CART_KEY, JSON.stringify(c)); }
- 
+
 function addToCart(id) {
   const prod = PRODUTOS.find(p => p.id === id);
   if (!prod) return;
   const cart = getCart();
   const item = cart.find(i => i.id === id);
   if (item) item.qty++;
-  else cart.push({ id:prod.id, nome:prod.nome, preco:prod.preco, img:prod.img, qty:1 });
+  else cart.push({ id: prod.id, nome: prod.nome, preco: prod.preco, img: prod.img, qty: 1 });
   saveCart(cart);
   updateCartBadge();
   toast(`${prod.nome} adicionado ao carrinho!`);
 }
- 
+
 function removeFromCart(id) {
   saveCart(getCart().filter(i => i.id !== id));
   updateCartBadge();
   renderCarrinho();
 }
- 
+
 function changeQty(id, delta) {
   const cart = getCart();
   const item = cart.find(i => i.id === id);
@@ -51,7 +51,7 @@ function changeQty(id, delta) {
   updateCartBadge();
   renderCarrinho();
 }
- 
+
 function updateCartBadge() {
   const cart = getCart();
   const total = cart.reduce((a, i) => a + i.qty, 0);
@@ -59,7 +59,7 @@ function updateCartBadge() {
   if (total > 0) { badge.textContent = total; badge.style.display = "flex"; }
   else { badge.style.display = "none"; }
 }
- 
+
 function renderCarrinho() {
   const cart = getCart();
   const lista = document.getElementById("carrinho-lista");
@@ -68,7 +68,7 @@ function renderCarrinho() {
   const resSubtotal = document.getElementById("res-subtotal");
   const resTotal = document.getElementById("res-total");
   if (!lista) return;
- 
+
   if (cart.length === 0) {
     empty.style.display = "block";
     content.style.display = "none";
@@ -76,7 +76,7 @@ function renderCarrinho() {
   }
   empty.style.display = "none";
   content.style.display = "grid";
- 
+
   let sub = 0;
   lista.innerHTML = cart.map(item => {
     const itemTotal = item.preco * item.qty;
@@ -86,7 +86,7 @@ function renderCarrinho() {
         <img class="item-img" src="${item.img}" alt="${item.nome}" onerror="this.src='https://via.placeholder.com/80x80/161616/e2d693?text=LPS'">
         <div>
           <div class="item-nome">${item.nome}</div>
-          <div class="item-preco-unit">R$ ${item.preco.toFixed(2).replace(".",",")}</div>
+          <div class="item-preco-unit">R$ ${item.preco.toFixed(2).replace(".", ",")}</div>
         </div>
       </div>
       <div class="item-qty-ctrl">
@@ -94,29 +94,29 @@ function renderCarrinho() {
         <span class="qty-val">${item.qty}</span>
         <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
       </div>
-      <div class="item-subtotal">R$ ${itemTotal.toFixed(2).replace(".",",")}</div>
+      <div class="item-subtotal">R$ ${itemTotal.toFixed(2).replace(".", ",")}</div>
       <div class="item-remove" onclick="removeFromCart(${item.id})"><i class="fa-solid fa-trash"></i></div>
     </div>`;
   }).join("");
- 
-  const fmt = v => "R$ " + v.toFixed(2).replace(".",",");
+
+  const fmt = v => "R$ " + v.toFixed(2).replace(".", ",");
   resSubtotal.textContent = fmt(sub);
   resTotal.textContent = fmt(sub);
 }
- 
+
 function calcularFrete() {
-  const cep = document.getElementById("cep-input").value.replace(/\D/g,"");
+  const cep = document.getElementById("cep-input").value.replace(/\D/g, "");
   if (cep.length < 8) { toast("CEP inválido! Digite 8 dígitos."); return; }
   const frete = Math.random() > 0.5 ? 0 : 12.90;
   const resFrete = document.getElementById("res-frete");
   const resTotal = document.getElementById("res-total");
   const cart = getCart();
   const sub = cart.reduce((a, i) => a + i.preco * i.qty, 0);
-  resFrete.textContent = frete === 0 ? "Grátis 🎉" : "R$ " + frete.toFixed(2).replace(".",",");
-  resTotal.textContent = "R$ " + (sub + frete).toFixed(2).replace(".",",");
-  toast(frete === 0 ? "Frete grátis para sua região!" : `Frete: R$ ${frete.toFixed(2).replace(".",",")}`);
+  resFrete.textContent = frete === 0 ? "Grátis 🎉" : "R$ " + frete.toFixed(2).replace(".", ",");
+  resTotal.textContent = "R$ " + (sub + frete).toFixed(2).replace(".", ",");
+  toast(frete === 0 ? "Frete grátis para sua região!" : `Frete: R$ ${frete.toFixed(2).replace(".", ",")}`);
 }
- 
+
 function finalizarCompra() {
   const cart = getCart();
   if (cart.length === 0) return;
@@ -126,7 +126,7 @@ function finalizarCompra() {
   toast("Pedido realizado com sucesso! 🎉");
   setTimeout(() => showView("home"), 1800);
 }
- 
+
 // =====================================================
 // RENDERIZAR CARDS DE PRODUTO
 // =====================================================
@@ -137,18 +137,18 @@ function prodCard(prod, showFull) {
     </div>
     <div class="prod-card-info">
       <h3>${prod.nome}</h3>
-      <div class="prod-card-preco">R$ ${prod.preco.toFixed(2).replace(".",",")}${prod.precoAntes ? `<s>R$ ${prod.precoAntes.toFixed(2).replace(".",",")}</s>` : ""}</div>
+      <div class="prod-card-preco">R$ ${prod.preco.toFixed(2).replace(".", ",")}${prod.precoAntes ? `<s>R$ ${prod.precoAntes.toFixed(2).replace(".", ",")}</s>` : ""}</div>
       <button class="btn-add" onclick="event.stopPropagation(); addToCart(${prod.id})">Adicionar ao Carrinho</button>
     </div>
   </div>`;
 }
- 
+
 function renderGridHome() {
   const grid = document.getElementById("grid-home");
   if (!grid) return;
-  grid.innerHTML = PRODUTOS.slice(0,6).map(p => prodCard(p)).join("");
+  grid.innerHTML = PRODUTOS.slice(0, 6).map(p => prodCard(p)).join("");
 }
- 
+
 function renderGridProdutos(lista) {
   const grid = document.getElementById("grid-produtos");
   const count = document.getElementById("produtos-count");
@@ -156,7 +156,7 @@ function renderGridProdutos(lista) {
   grid.innerHTML = lista.map(p => prodCard(p)).join("");
   if (count) count.textContent = `${lista.length} produto${lista.length !== 1 ? "s" : ""} encontrado${lista.length !== 1 ? "s" : ""}`;
 }
- 
+
 function filtrarProdutos() {
   const min = parseFloat(document.getElementById("preco-min").value) || 0;
   const max = parseFloat(document.getElementById("preco-max").value) || Infinity;
@@ -168,25 +168,25 @@ function filtrarProdutos() {
   });
   renderGridProdutos(lista);
 }
- 
+
 // =====================================================
 // MODAL PRODUTO
 // =====================================================
 let modalProdId = null;
- 
+
 function openModal(id) {
   const prod = PRODUTOS.find(p => p.id === id);
   if (!prod) return;
   modalProdId = id;
   document.getElementById("modal-img").src = prod.img;
-  document.getElementById("modal-img").onerror = function(){ this.src="https://via.placeholder.com/300x300/161616/e2d693?text=LPS"; };
+  document.getElementById("modal-img").onerror = function () { this.src = "https://via.placeholder.com/300x300/161616/e2d693?text=LPS"; };
   document.getElementById("modal-nome").textContent = prod.nome;
-  document.getElementById("modal-preco").textContent = "R$ " + prod.preco.toFixed(2).replace(".",",");
+  document.getElementById("modal-preco").textContent = "R$ " + prod.preco.toFixed(2).replace(".", ",");
   document.getElementById("modal-desc").textContent = prod.desc;
   document.getElementById("modal-overlay").classList.add("open");
   document.body.style.overflow = "hidden";
 }
- 
+
 function closeModal(e) {
   if (e.target === document.getElementById("modal-overlay")) closeModalBtn();
 }
@@ -197,36 +197,55 @@ function closeModalBtn() {
 function adicionarModalAoCarrinho() {
   if (modalProdId) { addToCart(modalProdId); closeModalBtn(); }
 }
- 
+
+
 // =====================================================
 // AUTH FORMS
 // =====================================================
 const emailRgx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const senhaRgx = /^.{6,}$/;
- 
+
 function renderLogin() {
   document.getElementById("auth-container").innerHTML = `
     <div class="auth-box">
       <h1>Fazer Login</h1>
       <p class="auth-sub">Acesse sua conta LPS Gravatas</p>
-      <label class="field-label">Email</label>
-      <div class="field-wrap">
-        <input class="field-input" type="email" id="login-email" placeholder="seu@email.com">
-      </div>
-      <label class="field-label">Senha</label>
-      <div class="field-wrap">
-        <input class="field-input" type="password" id="login-senha" placeholder="Sua senha">
-        <i class="fa-solid fa-eye eye-toggle" onclick="togglePwd('login-senha',this)"></i>
-      </div>
-      <span class="esqueci-link" onclick="renderEsqueci()">Esqueceu minha senha?</span>
-      <button class="btn-auth" onclick="doLogin()">Iniciar Sessão</button>
+      
+      <form autocomplete="on" onsubmit="event.preventDefault(); doLogin()">
+        
+        <label class="field-label">Email</label>
+        <div class="field-wrap">
+          <input class="field-input" 
+            type="email" 
+            id="login-email" 
+            name="email"
+            autocomplete="email"
+            placeholder="seu@email.com">
+        </div>
+
+        <label class="field-label">Senha</label>
+        <div class="field-wrap">
+          <input class="field-input" 
+            type="password" 
+            id="login-senha" 
+            name="password"
+            autocomplete="current-password"
+            placeholder="Sua senha">
+          <i class="fa-solid fa-eye eye-toggle" onclick="togglePwd('login-senha',this)"></i>
+        </div>
+
+        <span class="esqueci-link" onclick="renderEsqueci()">Esqueceu minha senha?</span>
+        <button type="submit" class="btn-auth">Iniciar Sessão</button>
+
+      </form>
+
       <hr class="auth-divider">
       <p class="auth-link">Não possui conta? <a onclick="renderCadastro()">Cadastre-se</a></p>
     </div>`;
   bindValidation("login-email", emailRgx);
   bindValidation("login-senha", senhaRgx);
 }
- 
+
 function renderCadastro() {
   document.getElementById("auth-container").innerHTML = `
     <div class="auth-box">
@@ -266,14 +285,14 @@ function renderCadastro() {
   const err = document.getElementById("erro-senha");
   const btn = document.getElementById("btn-cad");
   function checkSenhas() {
-    if (!s2.value) { err.style.display="none"; btn.disabled=true; return; }
-    if (s1.value !== s2.value) { err.style.display="block"; btn.disabled=true; }
-    else { err.style.display="none"; btn.disabled=!senhaRgx.test(s1.value); }
+    if (!s2.value) { err.style.display = "none"; btn.disabled = true; return; }
+    if (s1.value !== s2.value) { err.style.display = "block"; btn.disabled = true; }
+    else { err.style.display = "none"; btn.disabled = !senhaRgx.test(s1.value); }
   }
   s1.addEventListener("input", checkSenhas);
   s2.addEventListener("input", checkSenhas);
 }
- 
+
 function renderEsqueci() {
   document.getElementById("auth-container").innerHTML = `
     <div class="auth-box">
@@ -289,20 +308,68 @@ function renderEsqueci() {
     </div>`;
   bindValidation("esq-email", emailRgx);
 }
- 
+// =====================================================
+// PERFIL
+// =====================================================
+function renderPerfil() {
+  const dadosSalvos = localStorage.getItem("usuario");
+  if (!dadosSalvos) { showView("login"); return; }
+
+  const usuario = JSON.parse(dadosSalvos);
+  const nome = usuario.nome || "—";
+  const email = usuario.email || "—";
+  const telefone = usuario.telefone || "Não informado";
+  const iniciais = nome.split(" ").map(p => p[0]).slice(0, 2).join("").toUpperCase();
+
+  document.getElementById("perfil-container").innerHTML = `
+    <div class="perfil-header">
+      <div class="perfil-avatar-big">${iniciais}</div>
+      <div>
+        <h1>${nome}</h1>
+        <p style="font-size:1.6rem; color:var(--gray2); margin-top:.5rem;">${email}</p>
+      </div>
+    </div>
+
+    <div class="perfil-layout">
+      <div class="perfil-card">
+        <h3 class="perfil-card-title">Dados da Conta</h3>
+        <div class="perfil-linha"><span class="perfil-label">Nome</span><span class="perfil-val">${nome}</span></div>
+        <div class="perfil-linha"><span class="perfil-label">Email</span><span class="perfil-val">${email}</span></div>
+        <div class="perfil-linha"><span class="perfil-label">Telefone</span><span class="perfil-val">${telefone}</span></div>
+      </div>
+
+      <div class="perfil-card">
+        <h3 class="perfil-card-title">Ações</h3>
+        <button class="btn-perfil-acao" onclick="showView('produtos')"><i class="fa-solid fa-bag-shopping"></i> Ver Produtos</button>
+        <button class="btn-perfil-acao" onclick="showView('carrinho')"><i class="fa-solid fa-cart-shopping"></i> Meu Carrinho</button>
+        <button class="btn-perfil-sair" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Sair da Conta</button>
+      </div>
+    </div>`;
+}
+
+function logout() {
+  localStorage.removeItem("usuario");
+  const iconBtn = document.getElementById("loginbtnHeader");
+  const textEl = document.querySelector(".icon-text");
+  if (iconBtn) iconBtn.setAttribute("onclick", "showView('login')");
+  if (textEl) textEl.innerHTML = "";
+  toast("Até logo! 👋");
+  setTimeout(() => showView("login"), 1500);
+}
+
 function bindValidation(id, rgx) {
   const inp = document.getElementById(id);
   if (!inp) return;
   function check() {
     const v = inp.value.trim();
-    inp.classList.remove("valid","invalid");
+    inp.classList.remove("valid", "invalid");
     if (!v) return;
     inp.classList.add(rgx.test(v) ? "valid" : "invalid");
   }
   inp.addEventListener("input", check);
   inp.addEventListener("blur", check);
 }
- 
+
 function togglePwd(id, icon) {
   const inp = document.getElementById(id);
   if (!inp) return;
@@ -310,10 +377,11 @@ function togglePwd(id, icon) {
   icon.classList.toggle("fa-eye");
   icon.classList.toggle("fa-eye-slash");
 }
- 
-function doLogin() {
+
+async function doLogin() {
   const email = document.getElementById("login-email").value;
   const senha = document.getElementById("login-senha").value;
+  const text = document.getElementsByClassName("icon-text")[0];
   if (!emailRgx.test(email) || !senhaRgx.test(senha)) {
     toast("Preencha os campos corretamente!");
     document.querySelectorAll("#auth-container .field-input").forEach(i => {
@@ -321,19 +389,51 @@ function doLogin() {
     });
     return;
   }
-  toast("Login realizado com sucesso! 🎉");
-  setTimeout(() => showView("home"), 1500);
+
+  const url = "http://localhost:5081/login";
+
+  const dadosLogin = {
+    email: email,
+    senha: senha
+  };
+
+  try {
+    const resposta = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dadosLogin)
+    });
+
+    if (resposta.ok) {
+      const dadosUsuario = await resposta.json();
+      localStorage.setItem("usuario", JSON.stringify(dadosUsuario));
+
+      const nome = dadosUsuario.nome;
+      const iconBtn = document.getElementById("loginbtnHeader"); // 👈
+
+      text.innerHTML = nome;
+      iconBtn.setAttribute("onclick", "showView('perfil')"); // 👈 muda o destino
+
+      toast(`Bem-vindo, ${nome}! 🎉`);
+      setTimeout(() => showView("home"), 1500);
+    } else {
+      toast("Email ou senha incorretos!");
+    }
+  } catch (erro) {
+    console.error("Erro de conexão:", erro);
+    toast("Erro de conexão com o servidor.");
+  }
 }
- 
+
 async function doCadastro() {
   const nome = document.getElementById("cad-nome").value.trim();
   const email = document.getElementById("cad-email").value;
   const senha = document.getElementById("cad-senha").value;
   const telefone = document.getElementById("cad-tel").value.trim();
-  
-  if (!nome || !emailRgx.test(email) || !senhaRgx.test(senha)) { 
-      toast("Preencha todos os campos corretamente!"); 
-      return; 
+
+  if (!nome || !emailRgx.test(email) || !senhaRgx.test(senha)) {
+    toast("Preencha todos os campos corretamente!");
+    return;
   }
 
   try {
@@ -341,9 +441,9 @@ async function doCadastro() {
     const response = await fetch("http://localhost:5081/cadastrar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ 
-        nome, 
-        email, 
+      body: JSON.stringify({
+        nome,
+        email,
         senha,
         telefone
       })
@@ -351,15 +451,15 @@ async function doCadastro() {
 
     // 2. Padronizamos o nome da variável para 'response'
     if (response.ok) {
-        const resultado = await response.json();
-        console.log("Sucesso no banco:", resultado);
-        
-        // 3. O sucesso e redirecionamento só acontecem se o servidor der OK!
-        toast("Conta criada com sucesso! 🎉");
-        setTimeout(() => renderLogin(), 1500);
+      const resultado = await response.json();
+      console.log("Sucesso no banco:", resultado);
+
+      // 3. O sucesso e redirecionamento só acontecem se o servidor der OK!
+      toast("Conta criada com sucesso! 🎉");
+      setTimeout(() => renderLogin(), 1500);
     } else {
-        console.error("Erro no servidor:", response.status);
-        toast("Erro ao criar conta. Tente novamente.");
+      console.error("Erro no servidor:", response.status);
+      toast("Erro ao criar conta. Tente novamente.");
     }
   } catch (erro) {
     // 4. Adicionamos o catch para capturar erros de rede (API offline, por exemplo)
@@ -367,14 +467,14 @@ async function doCadastro() {
     toast("Erro de conexão com o servidor.");
   }
 }
- 
+
 function doEsqueci() {
   const email = document.getElementById("esq-email").value;
   if (!emailRgx.test(email)) { toast("Insira um email válido!"); return; }
   toast("Link de recuperação enviado! Verifique seu email.");
   setTimeout(() => renderLogin(), 2000);
 }
- 
+
 // =====================================================
 // NAVEGAÇÃO ENTRE VIEWS
 // =====================================================
@@ -382,20 +482,20 @@ function showView(name) {
   document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
   document.querySelectorAll(".nav-link[data-view]").forEach(l => l.classList.remove("active"));
   const target = document.getElementById("view-" + name);
-  if (target) { target.classList.add("active"); window.scrollTo(0,0); }
+  if (target) { target.classList.add("active"); window.scrollTo(0, 0); }
   const navLink = document.querySelector(`.nav-link[data-view="${name}"]`);
   if (navLink) navLink.classList.add("active");
- 
+
   if (name === "carrinho") renderCarrinho();
   if (name === "login") renderLogin();
   if (name === "produtos") renderGridProdutos(PRODUTOS);
+  if (name === "perfil") renderPerfil(); // 👈 estava faltando
 }
- 
 function scrollToSection(id) {
   const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior:"smooth" });
+  if (el) el.scrollIntoView({ behavior: "smooth" });
 }
- 
+
 // =====================================================
 // TOAST
 // =====================================================
@@ -407,12 +507,31 @@ function toast(msg) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => el.classList.remove("show"), 3000);
 }
- 
+
 // =====================================================
 // INIT
 // =====================================================
+function verificarUsuarioLogado() {
+  const dadosSalvos = localStorage.getItem("usuario");
+  if (dadosSalvos) {
+    const usuario = JSON.parse(dadosSalvos);
+    const textElement = document.querySelector(".icon-text");
+    const iconBtn = document.getElementById("loginbtnHeader"); // 👈 precisa ter esse id no HTML
+
+    if (textElement && usuario.nome) {
+      textElement.innerHTML = usuario.nome;
+      iconBtn.setAttribute("onclick", "showView('perfil')");
+    }
+  } else {
+    const iconBtn = document.getElementById("loginbtnHeader");
+    if (iconBtn) iconBtn.setAttribute("onclick", "showView('login')");
+  }
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
   renderGridHome();
   renderGridProdutos(PRODUTOS);
   updateCartBadge();
+  verificarUsuarioLogado();
 });

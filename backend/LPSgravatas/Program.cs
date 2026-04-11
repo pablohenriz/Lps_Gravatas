@@ -38,7 +38,9 @@ builder.Services.AddCors(options =>
     });
 });
 
+
 var app = builder.Build();
+
 
 app.UseCors();
 
@@ -98,7 +100,9 @@ app.MapPost("/login", async (AppDbContext db, LoginRequest login) =>
 
 app.MapGet("/usuarios", async (AppDbContext db) =>
 {
-    var listaUsuarios = await db.Usuarios.ToListAsync();
+    var listaUsuarios = await db.Usuarios
+        .Select(u => new { u.IdUser, u.Nome, u.Email }) // Não envia a senha!
+        .ToListAsync();
     return Results.Ok(listaUsuarios);
 });
 

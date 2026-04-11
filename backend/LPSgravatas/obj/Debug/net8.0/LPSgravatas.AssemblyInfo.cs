@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LPSgravatas")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2bd460e49b23ee2f9bde6a6060cc805671073f13")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a940f504d83f414016c02baaae3c24cd7254c979")]
 [assembly: System.Reflection.AssemblyProductAttribute("LPSgravatas")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LPSgravatas")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
