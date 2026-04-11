@@ -155,6 +155,20 @@ body {
 }
 
 /* Quando passar o mouse no ícone */
+.header-icons .fa-solid:hover+.icon-text {
+  opacity: 1;
+  visibility: visible;
+  /* Volta para a posição original (sobe os 10px) */
+  transform: translateX(-50%) translateY(0);
+}
+
+.header-icons .fa-user:hover+.icon-text {
+  opacity: 1;
+  visibility: visible;
+  /* Volta para a posição original (sobe os 10px) */
+  transform: translateX(-50%) translateY(0);
+}
+
 .header-icons .fa-user:hover+.icon-text {
   opacity: 1;
   visibility: visible;

@@ -405,12 +405,14 @@ async function doLogin() {
     });
 
     if (resposta.ok) {
+      const iconText = document.getElementsByClassName("icon-text")[0];
       const dadosUsuario = await resposta.json();
       localStorage.setItem("usuario", JSON.stringify(dadosUsuario));
 
       const nome = dadosUsuario.nome;
       const iconBtn = document.getElementById("loginbtnHeader"); // 👈
 
+      // Colocando o nome de usuario da pessoa no elemento de texto
       text.innerHTML = nome;
       iconBtn.setAttribute("onclick", "showView('perfil')"); // 👈 muda o destino
 

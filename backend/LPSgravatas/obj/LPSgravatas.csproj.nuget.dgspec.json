@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/home/pablo/Documentos/GitHub/Lps_Gravatas/backend/LPSgravatas/LPSgravatas.csproj": {}
+    "C:\\Users\\pablo.hsbraga\\Documents\\github\\Lps_Gravatas\\backend\\LPSgravatas\\LPSgravatas.csproj": {}
   },
   "projects": {
-    "/home/pablo/Documentos/GitHub/Lps_Gravatas/backend/LPSgravatas/LPSgravatas.csproj": {
+    "C:\\Users\\pablo.hsbraga\\Documents\\github\\Lps_Gravatas\\backend\\LPSgravatas\\LPSgravatas.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/pablo/Documentos/GitHub/Lps_Gravatas/backend/LPSgravatas/LPSgravatas.csproj",
+        "projectUniqueName": "C:\\Users\\pablo.hsbraga\\Documents\\github\\Lps_Gravatas\\backend\\LPSgravatas\\LPSgravatas.csproj",
         "projectName": "LPSgravatas",
-        "projectPath": "/home/pablo/Documentos/GitHub/Lps_Gravatas/backend/LPSgravatas/LPSgravatas.csproj",
-        "packagesPath": "/home/pablo/.nuget/packages/",
-        "outputPath": "/home/pablo/Documentos/GitHub/Lps_Gravatas/backend/LPSgravatas/obj/",
+        "projectPath": "C:\\Users\\pablo.hsbraga\\Documents\\github\\Lps_Gravatas\\backend\\LPSgravatas\\LPSgravatas.csproj",
+        "packagesPath": "C:\\Users\\pablo.hsbraga\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\pablo.hsbraga\\Documents\\github\\Lps_Gravatas\\backend\\LPSgravatas\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/pablo/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\pablo.hsbraga\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -37,7 +44,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -83,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/pablo/.dotnet/sdk/8.0.418/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.200-preview.0.26103.119/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
