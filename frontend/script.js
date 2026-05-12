@@ -409,7 +409,7 @@ async function doLogin() {
       const dadosUsuario = await resposta.json();
       localStorage.setItem("usuario", JSON.stringify(dadosUsuario));
 
-      const nome = dadosUsuario.nome;
+      const nome = dadosUsuario.Nome;
       const iconBtn = document.getElementById("loginbtnHeader"); // 👈
 
       // Colocando o nome de usuario da pessoa no elemento de texto
@@ -517,11 +517,14 @@ function verificarUsuarioLogado() {
   const dadosSalvos = localStorage.getItem("usuario");
   if (dadosSalvos) {
     const usuario = JSON.parse(dadosSalvos);
-    const textElement = document.querySelector(".icon-text");
-    const iconBtn = document.getElementById("loginbtnHeader"); // 👈 precisa ter esse id no HTML
+    const textElement = document.querySelector("#loginbtnHeader .icon-text");
+    const iconBtn = document.getElementById("loginbtnHeader");
 
-    if (textElement && usuario.nome) {
-      textElement.innerHTML = usuario.nome;
+    // ✅ Nome maiúsculo, igual ao que o backend retorna
+    const nome = usuario.Nome || usuario.nome;
+
+    if (textElement && nome) {
+      textElement.innerHTML = nome;
       iconBtn.setAttribute("onclick", "showView('perfil')");
     }
   } else {
